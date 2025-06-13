@@ -1,0 +1,7 @@
+.env
+__pycache__/
+*.pyc
+*.log
+.parsed_output/
+data/sample_docs/
+.ipynb_checkpoints/
