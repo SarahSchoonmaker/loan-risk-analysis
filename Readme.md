@@ -54,7 +54,7 @@ loan-fraud-pipeline/
 
 ### 1. Clone the Repo
 ```bash
-git clone https://github.com/yourname/loan-fraud-pipeline.git
+git clone https://github.com/sarahschoonmaker/loan-fraud-pipeline.git
 cd loan-fraud-pipeline
 ````
 
