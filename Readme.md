@@ -5,6 +5,11 @@ A production-ready pipeline that detects potentially fraudulent or incomplete co
 
 ---
 
+## Output
+
+![Dashboard Preview](output.png)
+
+
 ## 🔧 Technologies Used
 
 ### 🐍 Backend & Data Processing
