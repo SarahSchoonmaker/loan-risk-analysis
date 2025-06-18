@@ -1,6 +1,3 @@
-Absolutely! Here's your Loan Fraud Detection Pipeline documentation beautifully **formatted for clarity and professionalism** — ready for README.md or portfolio use:
-
----
 
 # 🛡️ **Loan Fraud Detection Pipeline**
 
@@ -139,6 +136,3 @@ FROM loan_applications
 WHERE ABS(income - doc_income) > income * 0.3;
 ```
 
----
-
-Would you like this saved as a clean Markdown or PDF version for GitHub/portfolio?
