@@ -1,62 +1,65 @@
-```
-# 🛡️ Loan Fraud Detection Pipeline
-
-A production-ready pipeline that detects potentially fraudulent or incomplete commercial loan applications by validating OCR-extracted documents, checking for field inconsistencies (e.g., income mismatch, falsified addresses), and surfacing issues via a real-time dashboard and analytics layer.
+Absolutely! Here's your Loan Fraud Detection Pipeline documentation beautifully **formatted for clarity and professionalism** — ready for README.md or portfolio use:
 
 ---
 
-## 🔧 Technologies Used
+# 🛡️ **Loan Fraud Detection Pipeline**
+
+A production-ready pipeline for detecting **fraudulent or incomplete commercial loan applications**. It validates OCR-extracted documents, checks for inconsistencies (e.g., income mismatch, falsified addresses), and surfaces risks via real-time analytics dashboards.
+
+---
+
+## 🔧 **Technologies Used**
 
 ### 🐍 Backend & Data Processing
 
-- **Python** – Core pipeline logic and validation
-- **spaCy** – NLP for address matching, entity recognition
-- **pandas** – Data wrangling and transformation
-- **psycopg2 / SQLAlchemy** – PostgreSQL connectivity
-- **boto3** – AWS SDK for S3 and Glue integration
+* **Python** – Core pipeline logic and orchestration
+* **spaCy** – NLP for address verification and entity extraction
+* **pandas** – Data wrangling and tabular processing
+* **psycopg2 / SQLAlchemy** – PostgreSQL interaction
+* **boto3** – AWS SDK for S3/Glue integration
 
 ### ☁️ AWS Stack
 
-- **Amazon S3** – Data lake storage for loan documents (CSV, JSON)
-- **AWS Glue** – Metadata crawling and optional ETL jobs
-- **Amazon Athena** – Serverless SQL for querying S3 data
-- **Amazon Redshift Serverless** – Fast analytics and dashboard backend
-- **IAM** – Role-based access control for S3 and Redshift
+* **Amazon S3** – Loan document storage (CSV, JSON)
+* **AWS Glue** – Schema crawler & optional ETL
+* **Amazon Athena** – Serverless SQL over S3
+* **Amazon Redshift Serverless** – Analytics warehouse
+* **IAM** – Role-based access control
 
 ### 📊 Visualization
 
-- **Amazon Redshift Query Editor v2** – For analytics and debugging
-- **Visualization**: Streamlit
+* **Amazon Redshift Query Editor v2** – SQL exploration/debugging
+* **Streamlit** – Interactive dashboards
 
 ---
 
-## 📁 Project Structure
-```
+## 📁 **Project Structure**
 
+```text
 loan-fraud-pipeline/
 ├── app/
-│ ├── main.py # Entry point
-│ ├── redshift.py # Redshift query functions
-│ ├── validation.py # Fraud rules (e.g., income mismatch)
-│ ├── nlp_utils.py # spaCy-based address checks
-│ └── config.py # Env and credentials loader
+│   ├── main.py              # Entry point
+│   ├── redshift.py          # Redshift query helpers
+│   ├── validation.py        # Fraud logic (e.g., income mismatch)
+│   ├── nlp_utils.py         # Address NLP checks (spaCy)
+│   └── config.py            # Env and credential loading
 ├── data/
-│ └── sample_outputs/ # (Optional) mock outputs
+│   └── sample_outputs/      # Mock output examples
 ├── requirements.txt
 ├── .env
 └── README.md
-
-````
+```
 
 ---
 
-## ⚙️ How to Run Locally
+## ⚙️ **Running Locally**
 
 ### 1. Clone the Repo
+
 ```bash
 git clone https://github.com/sarahschoonmaker/loan-fraud-pipeline.git
 cd loan-fraud-pipeline
-````
+```
 
 ### 2. Install Dependencies
 
@@ -65,11 +68,11 @@ pip install -r requirements.txt
 python -m spacy download en_core_web_sm
 ```
 
-### 3. Setup Environment Variables
+### 3. Configure Environment Variables
 
-Create a `.env` file:
+Create a `.env` file with:
 
-```
+```env
 DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=loan_fraud
@@ -78,7 +81,7 @@ DB_PASSWORD=yourpassword
 
 AWS_ACCESS_KEY_ID=your-key
 AWS_SECRET_ACCESS_KEY=your-secret
-AWS_REGION=your_region
+AWS_REGION=your-region
 ```
 
 ### 4. Run the Pipeline
@@ -89,48 +92,46 @@ python app/main.py
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ **Architecture Overview**
 
 ```text
-                  ┌────────────┐
-                  │ Loan CSVs  │
-                  │ (S3)       │
-                  └────┬───────┘
-                       │
-        ┌──────────────▼───────────────┐
-        │     AWS Glue Crawler         │
-        │  Extract schema from S3      │
-        └──────────────┬───────────────┘
-                       │
-        ┌──────────────▼────────────┐
-        │    AWS Athena / Redshift  │◄────────────┐
-        │  SQL queries on loan data │             │
-        └──────────────┬────────────┘             │
-                       │                          │
-     ┌─────────────────▼────────────┐             │
-     │       Python Validation      │             │
-     │  - Compare income fields     │             │
-     │  - NLP address similarity    │             │
-     └──────────────────────────────┘             │
-                       │                          │
-           ┌───────────▼────────────┐             │
-           │    Dashboard Layer     │             │
-           │  (Streamlit/QuickSight)│◄────────────┘
-           └────────────────────────┘
+                ┌────────────┐
+                │ Loan CSVs  │
+                │   (S3)     │
+                └────┬───────┘
+                     │
+     ┌───────────────▼───────────────┐
+     │      AWS Glue Crawler         │
+     │   Extract schema from S3      │
+     └──────────────┬────────────────┘
+                    │
+     ┌──────────────▼────────────┐
+     │ Athena / Redshift Queries │◄────────────┐
+     └──────────────┬────────────┘             │
+                    │                          │
+     ┌──────────────▼────────────┐             │
+     │   Python Validation Layer │             │
+     │ - Income comparison       │             │
+     │ - NLP address match       │             │
+     └───────────────────────────┘             │
+                    │                          │
+        ┌───────────▼─────────────┐            │
+        │  Dashboard (Streamlit)  │◄────────────┘
+        └─────────────────────────┘
 ```
 
 ---
 
-## ✅ Fraud Detection Rules
+## ✅ **Fraud Detection Rules**
 
-- **Income mismatch**: difference > 30% between declared and OCR income
-- **Address mismatch**: NLP fuzzy match score < threshold (e.g., 80%)
-- **Invalid zip/location**: Zip doesn't match extracted address
-- **Missing values**: Empty OCR fields
+* **Income mismatch** – >30% difference between declared and OCR-derived income
+* **Address mismatch** – Fuzzy match score < 80% between OCR and provided address
+* **Invalid ZIP/Location** – Zip doesn't match city/state via NLP or geodata
+* **Missing fields** – Required values absent in OCR results
 
 ---
 
-## 🔍 Sample Query in Redshift
+## 🔍 **Sample Query (Redshift)**
 
 ```sql
 SELECT loan_id, business_name
@@ -139,3 +140,5 @@ WHERE ABS(income - doc_income) > income * 0.3;
 ```
 
 ---
+
+Would you like this saved as a clean Markdown or PDF version for GitHub/portfolio?
